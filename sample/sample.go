@@ -14,12 +14,15 @@ type SubCommandAFlags struct {
 }
 
 func main() {
+
+	GoConsole.Printf("este es el <blue>%v</blue> y este es <red>%v</red> con variables\n", "AZUL", "ROJO")
+
 	root := GoConsole.Root{
 		Commands: map[string]GoConsole.Command{
 			"": {
 				Help:    "Main Command",
 				Example: "$ sample",
-				Flags: SubCommandAFlags{
+				Flags: &SubCommandAFlags{
 					String:  "test.yaml",
 					Boolean: false,
 					Integer: 123,

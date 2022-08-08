@@ -57,3 +57,46 @@ func Clear() {
 		value()
 	}
 }
+
+func formatToWidth(str string, width int) string {
+	result := ""
+
+	words := strings.Split(str, " ")
+	line := ""
+	for _, word := range words {
+		if len([]rune(line))+len([]rune(word))+1 > width {
+			result = result + "\n" + line
+			line = word + " "
+		} else {
+			line = line + word + " "
+		}
+	}
+
+	result = result + "\n" + line
+
+	return result
+}
+
+func FormatParagraph(str string, width int) string {
+	result := ""
+
+	ps := strings.Split(str, "\n")
+
+	for _, p := range ps {
+		result = result + formatToWidth(p, width)
+	}
+
+	return Colored(result)
+}
+
+func PrintParagraph(str string, width int) {
+	fmt.Print(FormatParagraph(str, 60))
+}
+
+func Println(str string) {
+	fmt.Println(Colored(str))
+}
+
+func Printf(format string, values ...interface{}) {
+	fmt.Printf(Colored(format), values...)
+}
