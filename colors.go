@@ -136,7 +136,7 @@ func Colored(str string) string {
 			formatted = strings.Replace(formatted, "<"+t+">", WhiteBoldUnderlined, -1)
 		}
 	}
-	reset := regexp.MustCompile(`</(blue|green|red|yellow|error|warning|success|bold|undeline)>`)
+	reset := regexp.MustCompile(`</(blue|green|red|yellow|purple|cyan|white|error|warning|success|bold|undeline)>`)
 	formatted = reset.ReplaceAllString(formatted, Reset)
 	return formatted
 }

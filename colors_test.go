@@ -22,8 +22,9 @@ func TestColors(t *testing.T) {
 	}
 
 	for i, test := range tests {
+
 		if test.input != test.expected {
-			t.Errorf("Test %d: Text will not print as expected (color %s) \n", i, test.color)
+			t.Errorf("Test %d: Text will not print as expected (color %s):\ngot  %s\nwant %s \n", i, test.color, Colored(test.input), Colored(test.expected))
 		}
 	}
 }

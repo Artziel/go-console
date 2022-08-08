@@ -55,23 +55,25 @@
 			<div id="nav">
 				<select id="files">
 				
-				<option value="file0">github.com/artziel/go-console/command.go (71.8%)</option>
+				<option value="file0">github.com/artziel/go-console/colors.go (100.0%)</option>
 				
-				<option value="file1">github.com/artziel/go-console/confirm_component.go (0.0%)</option>
+				<option value="file1">github.com/artziel/go-console/command.go (71.3%)</option>
 				
-				<option value="file2">github.com/artziel/go-console/decorators.go (0.0%)</option>
+				<option value="file2">github.com/artziel/go-console/confirm_component.go (0.0%)</option>
 				
-				<option value="file3">github.com/artziel/go-console/root.go (45.5%)</option>
+				<option value="file3">github.com/artziel/go-console/decorators.go (0.0%)</option>
 				
-				<option value="file4">github.com/artziel/go-console/sample/sample.go (0.0%)</option>
+				<option value="file4">github.com/artziel/go-console/root.go (45.5%)</option>
 				
-				<option value="file5">github.com/artziel/go-console/select_component.go (0.0%)</option>
+				<option value="file5">github.com/artziel/go-console/sample/sample.go (0.0%)</option>
 				
-				<option value="file6">github.com/artziel/go-console/system.go (0.0%)</option>
+				<option value="file6">github.com/artziel/go-console/select_component.go (0.0%)</option>
 				
-				<option value="file7">github.com/artziel/go-console/tests.go (96.7%)</option>
+				<option value="file7">github.com/artziel/go-console/system.go (0.0%)</option>
 				
-				<option value="file8">github.com/artziel/go-console/utilities.go (0.0%)</option>
+				<option value="file8">github.com/artziel/go-console/tests.go (96.7%)</option>
+				
+				<option value="file9">github.com/artziel/go-console/utilities.go (0.0%)</option>
 				
 				</select>
 			</div>
@@ -86,6 +88,150 @@
 		<div id="content">
 		
 		<pre class="file" id="file0" style="display: none">package GoConsole
+
+import (
+        "regexp"
+        "strings"
+)
+
+const (
+        Reset = "\033[0m"
+
+        Red    = "\033[31m"
+        Green  = "\033[32m"
+        Yellow = "\033[33m"
+        Blue   = "\033[34m"
+        Purple = "\033[35m"
+        Cyan   = "\033[36m"
+        White  = "\033[37m"
+
+        RedUnderlined    = "\033[4;31m"
+        GreenUnderlined  = "\033[4;32m"
+        YellowUnderlined = "\033[4;33m"
+        BlueUnderlined   = "\033[4;34m"
+        PurpleUnderlined = "\033[4;35m"
+        CyanUnderlined   = "\033[4;36m"
+        WhiteUnderlined  = "\033[4;37m"
+
+        RedBoldUnderlined    = "\033[1;4;31m"
+        GreenBoldUnderlined  = "\033[1;4;32m"
+        YellowBoldUnderlined = "\033[1;4;33m"
+        BlueBoldUnderlined   = "\033[1;4;34m"
+        PurpleBoldUnderlined = "\033[1;4;35m"
+        CyanBoldUnderlined   = "\033[1;4;36m"
+        WhiteBoldUnderlined  = "\033[1;4;37m"
+)
+
+func Colored(str string) string <span class="cov8" title="1">{
+        tags := []string{
+                "error",
+                "warning",
+                "info",
+                "success",
+
+                "green", "green underline", "green bold", "green bold underline", "green underline bold",
+                "red", "red underline", "red bold", "red bold underline", "red underline bold",
+                "cyan", "cyan underline", "cyan bold", "cyan bold underline", "cyan underline bold",
+                "yellow", "yellow underline", "yellow bold", "yellow bold underline", "yellow underline bold",
+                "blue", "blue underline", "blue bold", "blue bold underline", "blue underline bold",
+                "purple", "purple underline", "purple bold", "purple bold underline", "purple underline bold",
+                "white", "white underline", "white bold", "white bold underline", "white underline bold",
+        }
+        formatted := str
+
+        for _, t := range tags </span><span class="cov8" title="1">{
+                switch t </span>{
+                case "error":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Red, -1)</span>
+                case "warning":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Yellow, -1)</span>
+                case "info":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Blue, -1)</span>
+                case "success":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Green, -1)</span>
+
+                case "red":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Red, -1)</span>
+                case "green":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Green, -1)</span>
+                case "yellow":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Yellow, -1)</span>
+                case "cyan":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Cyan, -1)</span>
+                case "blue":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Blue, -1)</span>
+                case "purple":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", Purple, -1)</span>
+                case "white":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", White, -1)</span>
+
+                case "red underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", RedUnderlined, -1)</span>
+                case "green underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", GreenUnderlined, -1)</span>
+                case "yellow underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", YellowUnderlined, -1)</span>
+                case "cyan underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", CyanUnderlined, -1)</span>
+                case "blue underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", BlueUnderlined, -1)</span>
+                case "purple underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", PurpleUnderlined, -1)</span>
+                case "white underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", WhiteUnderlined, -1)</span>
+
+                case "red bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", RedUnderlined, -1)</span>
+                case "green bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", GreenUnderlined, -1)</span>
+                case "yellow bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", YellowUnderlined, -1)</span>
+                case "cyan bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", CyanUnderlined, -1)</span>
+                case "blue bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", BlueUnderlined, -1)</span>
+                case "purple bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", PurpleUnderlined, -1)</span>
+                case "white bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", WhiteUnderlined, -1)</span>
+
+                case "red bold underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", RedBoldUnderlined, -1)</span>
+                case "red underline bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", RedBoldUnderlined, -1)</span>
+                case "green bold underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", GreenBoldUnderlined, -1)</span>
+                case "green underline bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", GreenBoldUnderlined, -1)</span>
+                case "yellow bold underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", YellowBoldUnderlined, -1)</span>
+                case "yellow underline bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", YellowBoldUnderlined, -1)</span>
+                case "cyan bold underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", CyanBoldUnderlined, -1)</span>
+                case "cyan underline bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", CyanBoldUnderlined, -1)</span>
+                case "blue bold underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", BlueBoldUnderlined, -1)</span>
+                case "blue underline bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", BlueBoldUnderlined, -1)</span>
+                case "purple bold underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", PurpleBoldUnderlined, -1)</span>
+                case "purple underline bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", PurpleBoldUnderlined, -1)</span>
+                case "white bold underline":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", WhiteBoldUnderlined, -1)</span>
+                case "white underline bold":<span class="cov8" title="1">
+                        formatted = strings.Replace(formatted, "&lt;"+t+"&gt;", WhiteBoldUnderlined, -1)</span>
+                }
+        }
+        <span class="cov8" title="1">reset := regexp.MustCompile(`&lt;/(blue|green|red|yellow|purple|cyan|white|error|warning|success|bold|undeline)&gt;`)
+        formatted = reset.ReplaceAllString(formatted, Reset)
+        return formatted</span>
+}
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package GoConsole
 
 import (
         "errors"
@@ -178,7 +324,11 @@ func (c *Command) parseTags(tags string) (fieldTags, error) <span class="cov8" t
 
 func (c *Command) parseStruct(r interface{}, args []string) error <span class="cov8" title="1">{
 
-        if r == nil </span><span class="cov0" title="0">{
+        if reflect.ValueOf(r).Type().Kind() != reflect.Ptr </span><span class="cov0" title="0">{
+                return ErrWrongFalgsType
+        }</span>
+
+        <span class="cov8" title="1">if r == nil </span><span class="cov0" title="0">{
                 return nil
         }</span>
 
@@ -254,7 +404,7 @@ func (c *Command) GetHelp() string <span class="cov0" title="0">{
                 <span class="cov0" title="0">for i := 0; i &lt; s.NumField(); i++ </span><span class="cov0" title="0">{
                         tags, err := c.parseTags(string(s.Type().Field(i).Tag))
                         if err == nil </span><span class="cov0" title="0">{
-                                help = help + Rainbow.Colored("&lt;blue&gt;    -"+tags.Name) + ": " + tags.Usage + "&lt;/blue&gt;\n"
+                                help = help + Colored("&lt;blue&gt;    -"+tags.Name) + ": " + tags.Usage + "&lt;/blue&gt;\n"
                         }</span>
                 }
         }
@@ -263,13 +413,11 @@ func (c *Command) GetHelp() string <span class="cov0" title="0">{
 }
 </pre>
 		
-		<pre class="file" id="file1" style="display: none">package GoConsole
+		<pre class="file" id="file2" style="display: none">package GoConsole
 
 import (
         "fmt"
         "strings"
-
-        ConsoleColors "gitlab.com/alus/go-console-colors"
 )
 
 type ConfirmOption struct {
@@ -283,7 +431,7 @@ type ConfirmComponent struct {
 }
 
 func (c ConfirmComponent) Request() bool <span class="cov0" title="0">{
-        options := fmt.Sprintf(ConsoleColors.Colored("&lt;green&gt;%v&lt;/green&gt; / &lt;yellow&gt;%v&lt;/yellow&gt;: "), c.Yes.Label, c.No.Label)
+        options := fmt.Sprintf(Colored("&lt;green&gt;%v&lt;/green&gt; / &lt;yellow&gt;%v&lt;/yellow&gt;: "), c.Yes.Label, c.No.Label)
         fmt.Print(options)
 
         for </span><span class="cov0" title="0">{
@@ -311,66 +459,23 @@ func NewConfirm(yes ConfirmOption, no ConfirmOption) ConfirmComponent <span clas
 }</span>
 </pre>
 		
-		<pre class="file" id="file2" style="display: none">package GoConsole
-
-import (
-        "fmt"
-        "strings"
-
-        Rainbow "gitlab.com/alus/go-console-colors"
-)
-
-func Hr() <span class="cov0" title="0">{
-        fmt.Printf("%v\n", strings.Repeat("-", 60))
-}</span>
-
-func formatToWidth(str string, width int) string <span class="cov0" title="0">{
-        result := ""
-
-        words := strings.Split(str, " ")
-        line := ""
-        for _, word := range words </span><span class="cov0" title="0">{
-                if len([]rune(line))+len([]rune(word))+1 &gt; width </span><span class="cov0" title="0">{
-                        result = result + "\n" + line
-                        line = word + " "
-                }</span> else<span class="cov0" title="0"> {
-                        line = line + word + " "
-                }</span>
-        }
-
-        <span class="cov0" title="0">result = result + "\n" + line
-
-        return result</span>
-}
-
-func FormatParagraph(str string, width int) string <span class="cov0" title="0">{
-        result := ""
-
-        ps := strings.Split(str, "\n")
-
-        for _, p := range ps </span><span class="cov0" title="0">{
-                result = result + formatToWidth(p, width)
-        }</span>
-
-        <span class="cov0" title="0">return Rainbow.Colored(result)</span>
-}
-
-func PrintParagraph(str string, width int) <span class="cov0" title="0">{
-        fmt.Print(FormatParagraph(str, 60))
-}</span>
-
-func Println(str string) <span class="cov0" title="0">{
-        fmt.Println(Rainbow.Colored(str))
-}</span>
-</pre>
-		
 		<pre class="file" id="file3" style="display: none">package GoConsole
 
 import (
         "fmt"
-        "regexp"
+        "strings"
+)
 
-        Rainbow "gitlab.com/alus/go-console-colors"
+func Hr(width int) <span class="cov0" title="0">{
+        fmt.Printf("%v\n", strings.Repeat("-", width))
+}</span>
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package GoConsole
+
+import (
+        "fmt"
+        "regexp"
 )
 
 type Root struct {
@@ -409,9 +514,9 @@ func (r *Root) help() string <span class="cov0" title="0">{
         help := ""
         for key, cmd := range r.Commands </span><span class="cov0" title="0">{
                 if key == "" </span><span class="cov0" title="0">{
-                        help = help + fmt.Sprintf("- %s: ", Rainbow.Colored("&lt;yellow&gt;[With no SubCommand]&lt;/yellow&gt;"))
+                        help = help + fmt.Sprintf("- %s: ", Colored("&lt;yellow&gt;[With no SubCommand]&lt;/yellow&gt;"))
                 }</span> else<span class="cov0" title="0"> {
-                        help = help + fmt.Sprintf("- %s: ", Rainbow.Colored("&lt;yellow&gt;"+key+"&lt;/yellow&gt;"))
+                        help = help + fmt.Sprintf("- %s: ", Colored("&lt;yellow&gt;"+key+"&lt;/yellow&gt;"))
                 }</span>
                 <span class="cov0" title="0">help = help + fmt.Sprintf("%v\n", cmd.GetHelp())</span>
         }
@@ -424,7 +529,7 @@ func (r *Root) PrintHelp() <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file4" style="display: none">package main
+		<pre class="file" id="file5" style="display: none">package main
 
 import (
         "fmt"
@@ -440,6 +545,9 @@ type SubCommandAFlags struct {
 }
 
 func main() <span class="cov0" title="0">{
+
+        GoConsole.Printf("este es el &lt;blue&gt;%v&lt;/blue&gt; y este es &lt;red&gt;%v&lt;/red&gt; con variables\n", "AZUL", "ROJO")
+
         root := GoConsole.Root{
                 Commands: map[string]GoConsole.Command{
                         "": {
@@ -479,12 +587,10 @@ func main() <span class="cov0" title="0">{
 }
 </pre>
 		
-		<pre class="file" id="file5" style="display: none">package GoConsole
+		<pre class="file" id="file6" style="display: none">package GoConsole
 
 import (
         "fmt"
-
-        ConsoleColors "gitlab.com/alus/go-console-colors"
 )
 
 type SelectComponent struct {
@@ -504,7 +610,7 @@ func (c *SelectComponent) AddOption(label string) *SelectComponent <span class="
 func (c *SelectComponent) printOptions() <span class="cov0" title="0">{
 
         for i, op := range c.Options </span><span class="cov0" title="0">{
-                fmt.Printf(ConsoleColors.Colored("&lt;yellow&gt;%v)&lt;/yellow&gt; %v\n"), i+1, op)
+                fmt.Printf(Colored("&lt;yellow&gt;%v)&lt;/yellow&gt; %v\n"), i+1, op)
         }</span>
 }
 
@@ -530,7 +636,7 @@ func NewSelect(options []string) SelectComponent <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file6" style="display: none">package GoConsole
+		<pre class="file" id="file7" style="display: none">package GoConsole
 
 import (
         "errors"
@@ -557,7 +663,7 @@ func GetSystemInfo() sysinfo.SysInfo <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file7" style="display: none">package GoConsole
+		<pre class="file" id="file8" style="display: none">package GoConsole
 
 import (
         "bytes"
@@ -635,7 +741,7 @@ func captureOutput(f func()) string <span class="cov8" title="1">{
 }
 </pre>
 		
-		<pre class="file" id="file8" style="display: none">package GoConsole
+		<pre class="file" id="file9" style="display: none">package GoConsole
 
 import (
         "bufio"
@@ -694,6 +800,49 @@ func Clear() <span class="cov0" title="0">{
                 value()
         }</span>
 }
+
+func formatToWidth(str string, width int) string <span class="cov0" title="0">{
+        result := ""
+
+        words := strings.Split(str, " ")
+        line := ""
+        for _, word := range words </span><span class="cov0" title="0">{
+                if len([]rune(line))+len([]rune(word))+1 &gt; width </span><span class="cov0" title="0">{
+                        result = result + "\n" + line
+                        line = word + " "
+                }</span> else<span class="cov0" title="0"> {
+                        line = line + word + " "
+                }</span>
+        }
+
+        <span class="cov0" title="0">result = result + "\n" + line
+
+        return result</span>
+}
+
+func FormatParagraph(str string, width int) string <span class="cov0" title="0">{
+        result := ""
+
+        ps := strings.Split(str, "\n")
+
+        for _, p := range ps </span><span class="cov0" title="0">{
+                result = result + formatToWidth(p, width)
+        }</span>
+
+        <span class="cov0" title="0">return Colored(result)</span>
+}
+
+func PrintParagraph(str string, width int) <span class="cov0" title="0">{
+        fmt.Print(FormatParagraph(str, 60))
+}</span>
+
+func Println(str string) <span class="cov0" title="0">{
+        fmt.Println(Colored(str))
+}</span>
+
+func Printf(format string, values ...interface{}) <span class="cov0" title="0">{
+        fmt.Printf(Colored(format), values...)
+}</span>
 </pre>
 		
 		</div>
