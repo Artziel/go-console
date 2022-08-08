@@ -1,4 +1,4 @@
-module github.com/Artziel/go-console
+module github.com/artziel/go-console
 
 go 1.19
 

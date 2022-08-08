@@ -1,5 +1,5 @@
 # Golang Console 
-Artziel Narvaiza <artziel@gmail.com>
+artziel Narvaiza <artziel@gmail.com>
 
 ### Features
 - Allow use of sub command
@@ -15,7 +15,7 @@ import (
 	"fmt"
 	"os"
 
-	GoConsole "gitlab.com/Artziel/go-console"
+	GoConsole "gitlab.com/artziel/go-console"
 )
 
 type SubCommandAFlags struct {

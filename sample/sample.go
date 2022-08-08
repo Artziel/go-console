@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	GoConsole "github.com/Artziel/go-console"
+	GoConsole "github.com/artziel/go-console"
 )
 
 type SubCommandAFlags struct {
