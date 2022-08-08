@@ -19,7 +19,7 @@ func main() {
 			"": {
 				Help:    "Main Command",
 				Example: "$ sample",
-				Flags: &SubCommandAFlags{
+				Flags: SubCommandAFlags{
 					String:  "test.yaml",
 					Boolean: false,
 					Integer: 123,

@@ -1,4 +1,4 @@
-# Golang Command 
+# Golang Console 
 Artziel Narvaiza <artziel@gmail.com>
 
 ### Features
@@ -15,7 +15,7 @@ import (
 	"fmt"
 	"os"
 
-	GoConsole "gitlab.com/Artziel/go-cli"
+	GoConsole "gitlab.com/Artziel/go-console"
 )
 
 type SubCommandAFlags struct {

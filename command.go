@@ -93,6 +93,10 @@ func (c *Command) parseTags(tags string) (fieldTags, error) {
 
 func (c *Command) parseStruct(r interface{}, args []string) error {
 
+	if reflect.ValueOf(r).Type().Kind() != reflect.Ptr {
+		return ErrWrongFalgsType
+	}
+
 	if r == nil {
 		return nil
 	}
