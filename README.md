@@ -4,9 +4,6 @@ artziel Narvaiza <artziel@gmail.com>
 ### Features
 - Allow use of sub command
 
-### Dependencies
-- gitlab.com/alus/go-console-colors
-
 Use example:
 ```golang
 package main

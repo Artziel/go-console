@@ -3,8 +3,6 @@ package GoConsole
 import (
 	"fmt"
 	"strings"
-
-	ConsoleColors "gitlab.com/alus/go-console-colors"
 )
 
 type ConfirmOption struct {
@@ -18,7 +16,7 @@ type ConfirmComponent struct {
 }
 
 func (c ConfirmComponent) Request() bool {
-	options := fmt.Sprintf(ConsoleColors.Colored("<green>%v</green> / <yellow>%v</yellow>: "), c.Yes.Label, c.No.Label)
+	options := fmt.Sprintf(Colored("<green>%v</green> / <yellow>%v</yellow>: "), c.Yes.Label, c.No.Label)
 	fmt.Print(options)
 
 	for {

@@ -5,8 +5,6 @@ import (
 	"flag"
 	"reflect"
 	"strings"
-
-	Rainbow "gitlab.com/alus/go-console-colors"
 )
 
 type fieldTags struct {
@@ -173,7 +171,7 @@ func (c *Command) GetHelp() string {
 		for i := 0; i < s.NumField(); i++ {
 			tags, err := c.parseTags(string(s.Type().Field(i).Tag))
 			if err == nil {
-				help = help + Rainbow.Colored("<blue>    -"+tags.Name) + ": " + tags.Usage + "</blue>\n"
+				help = help + Colored("<blue>    -"+tags.Name) + ": " + tags.Usage + "</blue>\n"
 			}
 		}
 	}

@@ -2,8 +2,6 @@ package GoConsole
 
 import (
 	"fmt"
-
-	ConsoleColors "gitlab.com/alus/go-console-colors"
 )
 
 type SelectComponent struct {
@@ -23,7 +21,7 @@ func (c *SelectComponent) AddOption(label string) *SelectComponent {
 func (c *SelectComponent) printOptions() {
 
 	for i, op := range c.Options {
-		fmt.Printf(ConsoleColors.Colored("<yellow>%v)</yellow> %v\n"), i+1, op)
+		fmt.Printf(Colored("<yellow>%v)</yellow> %v\n"), i+1, op)
 	}
 }
 

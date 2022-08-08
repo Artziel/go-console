@@ -3,8 +3,6 @@ package GoConsole
 import (
 	"fmt"
 	"regexp"
-
-	Rainbow "gitlab.com/alus/go-console-colors"
 )
 
 type Root struct {
@@ -43,9 +41,9 @@ func (r *Root) help() string {
 	help := ""
 	for key, cmd := range r.Commands {
 		if key == "" {
-			help = help + fmt.Sprintf("- %s: ", Rainbow.Colored("<yellow>[With no SubCommand]</yellow>"))
+			help = help + fmt.Sprintf("- %s: ", Colored("<yellow>[With no SubCommand]</yellow>"))
 		} else {
-			help = help + fmt.Sprintf("- %s: ", Rainbow.Colored("<yellow>"+key+"</yellow>"))
+			help = help + fmt.Sprintf("- %s: ", Colored("<yellow>"+key+"</yellow>"))
 		}
 		help = help + fmt.Sprintf("%v\n", cmd.GetHelp())
 	}
