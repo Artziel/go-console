@@ -59,21 +59,25 @@
 				
 				<option value="file1">github.com/artziel/go-console/command.go (71.3%)</option>
 				
-				<option value="file2">github.com/artziel/go-console/confirm_component.go (0.0%)</option>
+				<option value="file2">github.com/artziel/go-console/components.go (0.0%)</option>
 				
-				<option value="file3">github.com/artziel/go-console/decorators.go (0.0%)</option>
+				<option value="file3">github.com/artziel/go-console/confirm_component.go (0.0%)</option>
 				
-				<option value="file4">github.com/artziel/go-console/root.go (45.5%)</option>
+				<option value="file4">github.com/artziel/go-console/decorators.go (0.0%)</option>
 				
-				<option value="file5">github.com/artziel/go-console/sample/sample.go (0.0%)</option>
+				<option value="file5">github.com/artziel/go-console/root.go (47.8%)</option>
 				
-				<option value="file6">github.com/artziel/go-console/select_component.go (0.0%)</option>
+				<option value="file6">github.com/artziel/go-console/sample/sample.go (0.0%)</option>
 				
-				<option value="file7">github.com/artziel/go-console/system.go (0.0%)</option>
+				<option value="file7">github.com/artziel/go-console/select_component.go (0.0%)</option>
 				
-				<option value="file8">github.com/artziel/go-console/tests.go (96.7%)</option>
+				<option value="file8">github.com/artziel/go-console/spinner_component.go (0.0%)</option>
 				
-				<option value="file9">github.com/artziel/go-console/utilities.go (0.0%)</option>
+				<option value="file9">github.com/artziel/go-console/system.go (0.0%)</option>
+				
+				<option value="file10">github.com/artziel/go-console/tests.go (96.7%)</option>
+				
+				<option value="file11">github.com/artziel/go-console/utilities.go (0.0%)</option>
 				
 				</select>
 			</div>
@@ -415,6 +419,45 @@ func (c *Command) GetHelp() string <span class="cov0" title="0">{
 		
 		<pre class="file" id="file2" style="display: none">package GoConsole
 
+import "time"
+
+func Spinner01() *Spinner <span class="cov0" title="0">{
+        spinner := Spinner{
+                delay: time.Millisecond * 100,
+                Frames: []string{
+                        "⣾",
+                        "⣽",
+                        "⣻",
+                        "⢿",
+                        "⡿",
+                        "⣟",
+                        "⣯",
+                        "⣷",
+                },
+        }
+
+        return &amp;spinner
+}</span>
+
+func Spinner02() *Spinner <span class="cov0" title="0">{
+        chars := "⡀⡁⡂⡃⡄⡅⡆⡇⡈⡉⡊⡋⡌⡍⡎⡏⡐⡑⡒⡓⡔⡕⡖⡗⡘⡙⡚⡛⡜⡝⡞⡟⡠⡡⡢⡣⡤⡥⡦⡧⡨⡩⡪⡫⡬⡭⡮⡯⡰⡱⡲⡳⡴⡵⡶⡷⡸⡹⡺⡻⡼⡽⡾⡿⢀⢁⢂⢃⢄⢅⢆⢇⢈⢉⢊⢋⢌⢍⢎⢏⢐⢑⢒⢓⢔⢕⢖⢗⢘⢙⢚⢛⢜⢝⢞⢟⢠⢡⢢⢣⢤⢥⢦⢧⢨⢩⢪⢫⢬⢭⢮⢯⢰⢱⢲⢳⢴⢵⢶⢷⢸⢹⢺⢻⢼⢽⢾⢿⣀⣁⣂⣃⣄⣅⣆⣇⣈⣉⣊⣋⣌⣍⣎⣏⣐⣑⣒⣓⣔⣕⣖⣗⣘⣙⣚⣛⣜⣝⣞⣟⣠⣡⣢⣣⣤⣥⣦⣧⣨⣩⣪⣫⣬⣭⣮⣯⣰⣱⣲⣳⣴⣵⣶⣷⣸⣹⣺⣻⣼⣽⣾⣿"
+
+        frames := []string{}
+        for _, c := range chars </span><span class="cov0" title="0">{
+                frames = append(frames, string(c))
+        }</span>
+
+        <span class="cov0" title="0">spinner := Spinner{
+                delay:  time.Millisecond * 100,
+                Frames: frames,
+        }
+
+        return &amp;spinner</span>
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package GoConsole
+
 import (
         "fmt"
         "strings"
@@ -459,7 +502,7 @@ func NewConfirm(yes ConfirmOption, no ConfirmOption) ConfirmComponent <span clas
 }</span>
 </pre>
 		
-		<pre class="file" id="file3" style="display: none">package GoConsole
+		<pre class="file" id="file4" style="display: none">package GoConsole
 
 import (
         "fmt"
@@ -471,7 +514,7 @@ func Hr(width int) <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file4" style="display: none">package GoConsole
+		<pre class="file" id="file5" style="display: none">package GoConsole
 
 import (
         "fmt"
@@ -484,12 +527,13 @@ type Root struct {
 }
 
 func (r *Root) Run(args []string) error <span class="cov8" title="1">{
+        var err error
         cmd := ""
 
         if len(args) &gt; 0 </span><span class="cov8" title="1">{
                 if args[0] == "help" || args[0] == "-h" </span><span class="cov0" title="0">{
                         r.PrintHelp()
-                        return nil
+                        return err
                 }</span>
 
                 <span class="cov8" title="1">if match, _ := regexp.MatchString("^-(\\w)", args[0]); !match </span><span class="cov8" title="1">{
@@ -503,7 +547,7 @@ func (r *Root) Run(args []string) error <span class="cov8" title="1">{
         }</span>
 
         <span class="cov8" title="1">command := r.Commands[cmd]
-        if err := command.Execute(args); err != nil </span><span class="cov0" title="0">{
+        if err = command.Execute(args); err != nil </span><span class="cov0" title="0">{
                 return err
         }</span>
 
@@ -529,11 +573,12 @@ func (r *Root) PrintHelp() <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file5" style="display: none">package main
+		<pre class="file" id="file6" style="display: none">package main
 
 import (
         "fmt"
         "os"
+        "time"
 
         GoConsole "github.com/artziel/go-console"
 )
@@ -545,9 +590,6 @@ type SubCommandAFlags struct {
 }
 
 func main() <span class="cov0" title="0">{
-
-        GoConsole.Printf("este es el &lt;blue&gt;%v&lt;/blue&gt; y este es &lt;red&gt;%v&lt;/red&gt; con variables\n", "AZUL", "ROJO")
-
         root := GoConsole.Root{
                 Commands: map[string]GoConsole.Command{
                         "": {
@@ -561,6 +603,14 @@ func main() <span class="cov0" title="0">{
                                 Run: func(args interface{}) error </span><span class="cov0" title="0">{
                                         flags := args.(*SubCommandAFlags)
                                         fmt.Printf("Main Command - Args: %v\n", flags)
+
+                                        spinner := GoConsole.Spinner02()
+                                        spinner.SetColor("blue").SetSufix(" Runing Process, please wait!").Start()
+
+                                        time.Sleep(5 * time.Second)
+                                        spinner.Stop()
+                                        GoConsole.Printf("Process finish ... &lt;green&gt;OK!&lt;/green&gt;\n")
+
                                         return nil
                                 }</span>,
                         },
@@ -587,7 +637,7 @@ func main() <span class="cov0" title="0">{
 }
 </pre>
 		
-		<pre class="file" id="file6" style="display: none">package GoConsole
+		<pre class="file" id="file7" style="display: none">package GoConsole
 
 import (
         "fmt"
@@ -636,7 +686,122 @@ func NewSelect(options []string) SelectComponent <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file7" style="display: none">package GoConsole
+		<pre class="file" id="file8" style="display: none">package GoConsole
+
+import (
+        "fmt"
+        "strings"
+        "time"
+)
+
+type Spinner struct {
+        // Public
+        prefix string
+        sufix  string
+        Frames []string
+
+        // Private
+        delay        time.Duration
+        currentFrame int
+        color        string
+        stop         chan struct{}
+        drawLength   int
+}
+
+func (s *Spinner) draw() <span class="cov0" title="0">{
+        prev := 0
+        if s.currentFrame == 0 </span><span class="cov0" title="0">{
+                prev = len(s.Frames) - 1
+        }</span>
+
+        <span class="cov0" title="0">frame := s.Frames[s.currentFrame]
+        if s.color != "" </span><span class="cov0" title="0">{
+                frame = Colored(fmt.Sprintf("&lt;"+s.color+"&gt;%s&lt;/"+s.color+"&gt;", s.Frames[s.currentFrame]))
+        }</span>
+
+        <span class="cov0" title="0">fmt.Printf("%s%s%s%s", s.prefix, strings.Repeat("\r", len(s.Frames[prev])), frame, s.sufix)
+
+        s.currentFrame++
+        if s.currentFrame == len(s.Frames) </span><span class="cov0" title="0">{
+                s.currentFrame = 0
+        }</span>
+}
+
+func (s *Spinner) SetDelay(delay time.Duration) *Spinner <span class="cov0" title="0">{
+        s.delay = delay
+
+        return s
+}</span>
+
+func (s *Spinner) SetPrefix(prefix string) *Spinner <span class="cov0" title="0">{
+        s.prefix = prefix
+
+        return s
+}</span>
+
+func (s *Spinner) SetSufix(sufix string) *Spinner <span class="cov0" title="0">{
+        s.sufix = sufix
+
+        return s
+}</span>
+
+func (s *Spinner) SetColor(color string) *Spinner <span class="cov0" title="0">{
+        c := strings.ToLower(color)
+        s.color = color
+
+        colors := map[string]struct{}{
+                "red":    {},
+                "green":  {},
+                "yellow": {},
+                "blue":   {},
+                "purple": {},
+                "cyan":   {},
+                "white":  {},
+        }
+
+        if _, found := colors[c]; found </span><span class="cov0" title="0">{
+                s.color = color
+        }</span>
+
+        <span class="cov0" title="0">return s</span>
+}
+
+func (s *Spinner) Stop() <span class="cov0" title="0">{
+        s.stop &lt;- struct{}{}
+        close(s.stop)
+}</span>
+
+func (s *Spinner) clear() <span class="cov0" title="0">{
+        fmt.Printf("\r%s\r", strings.Repeat(" ", s.drawLength))
+}</span>
+
+func (s *Spinner) Start() <span class="cov0" title="0">{
+        s.stop = make(chan struct{})
+
+        for _, frame := range s.Frames </span><span class="cov0" title="0">{
+                if len(frame) &gt; s.drawLength </span><span class="cov0" title="0">{
+                        s.drawLength = len(frame) + len(s.prefix) + len(s.sufix)
+                }</span>
+        }
+
+        <span class="cov0" title="0">go func(spinner *Spinner) </span><span class="cov0" title="0">{
+                fmt.Printf("\033[?25l")
+                for </span><span class="cov0" title="0">{
+                        select </span>{
+                        case &lt;-s.stop:<span class="cov0" title="0">
+                                s.clear()
+                                fmt.Printf("\033[?25h")
+                                return</span>
+                        default:<span class="cov0" title="0">
+                                s.draw()
+                                time.Sleep(s.delay)</span>
+                        }
+                }
+        }(s)
+}
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package GoConsole
 
 import (
         "errors"
@@ -663,7 +828,7 @@ func GetSystemInfo() sysinfo.SysInfo <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file8" style="display: none">package GoConsole
+		<pre class="file" id="file10" style="display: none">package GoConsole
 
 import (
         "bytes"
@@ -741,7 +906,7 @@ func captureOutput(f func()) string <span class="cov8" title="1">{
 }
 </pre>
 		
-		<pre class="file" id="file9" style="display: none">package GoConsole
+		<pre class="file" id="file11" style="display: none">package GoConsole
 
 import (
         "bufio"

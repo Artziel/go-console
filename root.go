@@ -11,12 +11,13 @@ type Root struct {
 }
 
 func (r *Root) Run(args []string) error {
+	var err error
 	cmd := ""
 
 	if len(args) > 0 {
 		if args[0] == "help" || args[0] == "-h" {
 			r.PrintHelp()
-			return nil
+			return err
 		}
 
 		if match, _ := regexp.MatchString("^-(\\w)", args[0]); !match {
@@ -30,7 +31,7 @@ func (r *Root) Run(args []string) error {
 	}
 
 	command := r.Commands[cmd]
-	if err := command.Execute(args); err != nil {
+	if err = command.Execute(args); err != nil {
 		return err
 	}
 
