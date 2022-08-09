@@ -21,17 +21,14 @@ type Spinner struct {
 }
 
 func (s *Spinner) draw() {
-	prev := 0
-	if s.currentFrame == 0 {
-		prev = len(s.Frames) - 1
-	}
 
 	frame := s.Frames[s.currentFrame]
 	if s.color != "" {
 		frame = Colored(fmt.Sprintf("<"+s.color+">%s</"+s.color+">", s.Frames[s.currentFrame]))
 	}
 
-	fmt.Printf("\r%v\r%s%s%s", strings.Repeat(" ", len(s.Frames[prev])), s.prefix, frame, s.sufix)
+	s.clear()
+	fmt.Printf("%s%s%s", Colored(s.prefix), frame, Colored(s.sufix))
 
 	s.currentFrame++
 	if s.currentFrame == len(s.Frames) {

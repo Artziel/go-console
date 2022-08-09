@@ -30,7 +30,7 @@ func main() {
 					fmt.Printf("Main Command - Args: %v\n", flags)
 
 					spinner := GoConsole.Spinner02()
-					spinner.SetColor("blue").SetSufix(" Runing Process, please wait!").Start()
+					spinner.SetColor("blue").SetPrefix("*.- ").SetSufix(" Runing Process, please wait!").Start()
 
 					time.Sleep(5 * time.Second)
 					spinner.Stop()
