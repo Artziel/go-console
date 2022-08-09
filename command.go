@@ -141,12 +141,18 @@ func (c *Command) parseStruct(r interface{}, args []string) error {
 		f := s.Field(i)
 		switch f.Kind() {
 		case reflect.String:
-			f.SetString(*mStr[s.Type().Field(i).Name])
+			if _, found := mStr[s.Type().Field(i).Name]; found {
+				f.SetString(*mStr[s.Type().Field(i).Name])
+			}
 		case reflect.Bool:
-			f.SetBool(*mBool[s.Type().Field(i).Name])
+			if _, found := mBool[s.Type().Field(i).Name]; found {
+				f.SetBool(*mBool[s.Type().Field(i).Name])
+			}
 		case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-			v := *mInt[s.Type().Field(i).Name]
-			f.SetInt(int64(v))
+			if _, found := mInt[s.Type().Field(i).Name]; found {
+				v := *mInt[s.Type().Field(i).Name]
+				f.SetInt(int64(v))
+			}
 		}
 	}
 
