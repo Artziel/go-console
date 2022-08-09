@@ -31,7 +31,7 @@ func (s *Spinner) draw() {
 		frame = Colored(fmt.Sprintf("<"+s.color+">%s</"+s.color+">", s.Frames[s.currentFrame]))
 	}
 
-	fmt.Printf("%s%s%s%s", s.prefix, strings.Repeat("\r", len(s.Frames[prev])), frame, s.sufix)
+	fmt.Printf("\r%v\r%s%s%s", strings.Repeat(" ", len(s.Frames[prev])), s.prefix, frame, s.sufix)
 
 	s.currentFrame++
 	if s.currentFrame == len(s.Frames) {
