@@ -72,7 +72,7 @@ func formatToWidth(str string, width int) string {
 		}
 	}
 
-	result = result + "\n" + line
+	result = result + "\n" + strings.TrimRight(line, " ")
 
 	return result
 }
