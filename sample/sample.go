@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
 
 	GoConsole "github.com/artziel/go-console"
 )
@@ -26,15 +25,21 @@ func main() {
 					Integer: 123,
 				},
 				Run: func(args interface{}) error {
-					flags := args.(*SubCommandAFlags)
-					fmt.Printf("Main Command - Args: %v\n", flags)
+					cmd := GoConsole.NewShellCommand("systemctl enable --now snapd.socket", "Enable snapd service")
+					if success := cmd.Exec(); !success {
+						fmt.Printf("%v\n", cmd.GetLog())
+					}
+					/*
+						flags := args.(*SubCommandAFlags)
+						fmt.Printf("Main Command - Args: %v\n", flags)
 
-					spinner := GoConsole.Spinner09()
-					spinner.SetColor("blue").SetPrefix("*.- ").SetSufix(" Runing Process, please wait!").Start()
+						spinner := GoConsole.Spinner09()
+						spinner.SetColor("blue").SetPrefix("*.- ").SetSufix(" Runing Process, please wait!").Start()
 
-					time.Sleep(5 * time.Second)
-					spinner.Stop()
-					GoConsole.Printf("Process finish ... <green>OK!</green>\n")
+						time.Sleep(5 * time.Second)
+						spinner.Stop()
+						GoConsole.Printf("Process finish ... <green>OK!</green>\n")
+					*/
 
 					return nil
 				},

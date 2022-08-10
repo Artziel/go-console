@@ -65,7 +65,7 @@ func (c *ShellCommand) Exec() bool {
 
 func NewShellCommand(cmd string, description string) ShellCommand {
 	return ShellCommand{
-		Description: cmd,
-		cmd:         description,
+		Description: description,
+		cmd:         cmd,
 	}
 }
