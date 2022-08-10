@@ -25,7 +25,7 @@ func GetSystemInfo() sysinfo.SysInfo {
 		si.GetSysInfo()
 	} else {
 		si.OS = sysinfo.OS{
-			Vendor: "darwin",
+			Vendor: runtime.GOOS,
 		}
 	}
 	return si
