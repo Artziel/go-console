@@ -28,7 +28,7 @@ func (s *Spinner) draw() {
 	}
 
 	s.clear()
-	fmt.Printf("%s%s%s", Colored(s.prefix), frame, Colored(s.sufix))
+	Printf("%s%s%s", s.prefix, frame, s.sufix)
 
 	s.currentFrame++
 	if s.currentFrame == len(s.Frames) {

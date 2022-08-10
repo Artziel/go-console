@@ -30,7 +30,7 @@ func ScanInt() int {
 }
 
 func WaitForEnter(msg string) {
-	fmt.Println(msg)
+	Println(msg)
 	var input string
 	fmt.Scanln(&input)
 }
@@ -86,11 +86,15 @@ func FormatParagraph(str string, width int) string {
 		result = result + formatToWidth(p, width)
 	}
 
-	return Colored(result)
+	return result
 }
 
 func PrintParagraph(str string, width int) {
-	fmt.Print(FormatParagraph(str, 60))
+	Print(FormatParagraph(str, width))
+}
+
+func Print(str string) {
+	fmt.Print(Colored(str))
 }
 
 func Println(str string) {

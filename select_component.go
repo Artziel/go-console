@@ -1,9 +1,5 @@
 package GoConsole
 
-import (
-	"fmt"
-)
-
 type SelectComponent struct {
 	Options []string
 }
@@ -21,14 +17,14 @@ func (c *SelectComponent) AddOption(label string) *SelectComponent {
 func (c *SelectComponent) printOptions() {
 
 	for i, op := range c.Options {
-		fmt.Printf(Colored("<yellow>%v)</yellow> %v\n"), i+1, op)
+		Printf("<yellow>%v)</yellow> %v\n", i+1, op)
 	}
 }
 
 func (c *SelectComponent) Request(message string) int {
 
 	c.printOptions()
-	fmt.Print(message)
+	Printf(message)
 
 	for {
 		v := ScanInt()
