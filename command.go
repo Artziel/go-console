@@ -13,19 +13,34 @@ type fieldTags struct {
 }
 
 type Command struct {
-	flagSet *flag.FlagSet
 
-	Name    string
-	Help    string
-	Example string
+	// Public
+	RootRequired bool
+	RootExcluded bool
+	Name         string
+	Help         string
+	Example      string
 
 	Flags interface{}
 
 	Init func() error
 	Run  func(f interface{}) error
+
+	// Privated
+	flagSet *flag.FlagSet
 }
 
 func (c *Command) Execute(args []string) error {
+
+	isRoot, _ := IsRoot()
+	if c.RootExcluded && isRoot {
+		return ErrSubCommandRootExcluded
+	}
+
+	if c.RootRequired && !isRoot {
+		return ErrSubCommandRootRequired
+	}
+
 	if err := c.parseStruct(c.Flags, args); err != nil {
 		return err
 	}

@@ -6,6 +6,8 @@ var ErrWrongFalgsType = errors.New("command flags must be a pointer to an struct
 
 var ErrSubCommandUnespecified = errors.New("you must pass a sub-command")
 var ErrSubCommandNotFound = errors.New("sub-command not found")
+var ErrSubCommandRootRequired = errors.New("sub-command must be executed by root")
+var ErrSubCommandRootExcluded = errors.New("sub-command can not be executed by root")
 
 var ErrTagNoFieldTag error = errors.New("no field tags")
 var ErrTagEmptyFieldTag error = errors.New("empty field tag")
