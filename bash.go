@@ -51,7 +51,13 @@ func (c *ShellCommand) Exec() bool {
 	err := cmd.Run()
 	if err != nil {
 		success = false
-		c.log = c.log + fmt.Sprintf("Command \"%s\" Execution FAIL\n%s\n%s\n", c.Description, strings.Repeat("-", 60), errb.String())
+		c.log = c.log + fmt.Sprintf(
+			"Command \"%s\" Execution FAIL\n%s\n%s\nERROR: %s\n",
+			c.Description,
+			strings.Repeat("-", 60),
+			errb.String(),
+			err,
+		)
 	}
 
 	return success
