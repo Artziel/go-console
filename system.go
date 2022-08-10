@@ -3,9 +3,6 @@ package GoConsole
 import (
 	"errors"
 	"os/user"
-	"runtime"
-
-	"github.com/zcalusic/sysinfo"
 )
 
 var ErrUnableToGetUser error = errors.New("unable to get current user")
@@ -17,16 +14,4 @@ func IsRoot() (bool, error) {
 		return false, ErrUnableToGetUser
 	}
 	return currentUser.Username == "root", nil
-}
-
-func GetSystemInfo() sysinfo.SysInfo {
-	var si sysinfo.SysInfo
-	if runtime.GOOS == "linux" {
-		si.GetSysInfo()
-	} else {
-		si.OS = sysinfo.OS{
-			Vendor: runtime.GOOS,
-		}
-	}
-	return si
 }
