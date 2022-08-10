@@ -3,6 +3,7 @@ package GoConsole
 import (
 	"errors"
 	"os/user"
+	"runtime"
 
 	"github.com/zcalusic/sysinfo"
 )
@@ -20,6 +21,12 @@ func IsRoot() (bool, error) {
 
 func GetSystemInfo() sysinfo.SysInfo {
 	var si sysinfo.SysInfo
-	si.GetSysInfo()
+	if runtime.GOOS == "linux" {
+		si.GetSysInfo()
+	} else {
+		si.OS = sysinfo.OS{
+			Vendor: "darwin",
+		}
+	}
 	return si
 }
