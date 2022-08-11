@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"time"
 
 	GoConsole "github.com/artziel/go-console"
 )
@@ -28,19 +27,6 @@ func main() {
 				Run: func(args interface{}) error {
 					flags := args.(*SubCommandAFlags)
 					fmt.Printf("Main Command - Args: %v\n", flags)
-
-					cmd := GoConsole.NewShellCommand("ls -la", "List files")
-					if success := cmd.Exec(); !success {
-						fmt.Printf("%v\n", cmd.GetLog())
-					}
-
-					spinner := GoConsole.Spinner09()
-					spinner.SetColor("blue").SetPrefix("Test Prefix ").SetSufix(" Runing Process, please wait!").Start()
-
-					time.Sleep(5 * time.Second)
-					spinner.Stop()
-					GoConsole.Printf("Process finish ... <green>OK!</green>\n")
-
 					return nil
 				},
 			},
