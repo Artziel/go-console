@@ -2,6 +2,7 @@ package GoConsole
 
 import (
 	"fmt"
+	"os"
 	"regexp"
 )
 
@@ -10,7 +11,12 @@ type Root struct {
 	Commands map[string]Command
 }
 
-func (r *Root) Run(args []string) error {
+func (r *Root) Run() error {
+	args := os.Args[1:]
+	return r.run(args)
+}
+
+func (r *Root) run(args []string) error {
 	var err error
 	cmd := ""
 

@@ -22,7 +22,7 @@ func TestRoot(t *testing.T) {
 			"-b",
 			"-i=321",
 		}
-		if err := root.Run(args); err != nil {
+		if err := root.run(args); err != nil {
 			fmt.Println(err.Error())
 		}
 	})
@@ -39,7 +39,7 @@ func TestRoot(t *testing.T) {
 			"-b",
 			"-i=321",
 		}
-		if err := root.Run(args); err != nil {
+		if err := root.run(args); err != nil {
 			fmt.Println(err.Error())
 		}
 	})

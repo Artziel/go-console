@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 
 	GoConsole "github.com/artziel/go-console"
 )
@@ -47,7 +46,7 @@ func main() {
 		},
 	}
 
-	if err := root.Run(os.Args[1:]); err != nil {
+	if err := root.Run(); err != nil {
 		fmt.Println(err.Error())
 	}
 }
