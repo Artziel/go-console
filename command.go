@@ -5,6 +5,8 @@ import (
 	"flag"
 	"reflect"
 	"strings"
+
+	Util "github.com/artziel/go-utilities"
 )
 
 type fieldTags struct {
@@ -32,7 +34,7 @@ type Command struct {
 
 func (c *Command) Execute(args []string) error {
 
-	isRoot, _ := IsRoot()
+	isRoot, _ := Util.IsRoot()
 	if c.RootExcluded && isRoot {
 		return ErrSubCommandRootExcluded
 	}
