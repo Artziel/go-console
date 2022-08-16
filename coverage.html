@@ -67,15 +67,15 @@
 				
 				<option value="file5">github.com/artziel/go-console/decorators.go (0.0%)</option>
 				
-				<option value="file6">github.com/artziel/go-console/root.go (47.8%)</option>
+				<option value="file6">github.com/artziel/go-console/root.go (44.0%)</option>
 				
-				<option value="file7">github.com/artziel/go-console/sample/sample.go (0.0%)</option>
+				<option value="file7">github.com/artziel/go-console/samples/command/command.go (0.0%)</option>
 				
-				<option value="file8">github.com/artziel/go-console/select_component.go (0.0%)</option>
+				<option value="file8">github.com/artziel/go-console/samples/spinner/spinner.go (0.0%)</option>
 				
-				<option value="file9">github.com/artziel/go-console/spinner_component.go (0.0%)</option>
+				<option value="file9">github.com/artziel/go-console/select_component.go (0.0%)</option>
 				
-				<option value="file10">github.com/artziel/go-console/system.go (42.9%)</option>
+				<option value="file10">github.com/artziel/go-console/spinner_component.go (0.0%)</option>
 				
 				<option value="file11">github.com/artziel/go-console/tests.go (96.7%)</option>
 				
@@ -317,6 +317,8 @@ import (
         "flag"
         "reflect"
         "strings"
+
+        Util "github.com/artziel/go-utilities"
 )
 
 type fieldTags struct {
@@ -344,7 +346,7 @@ type Command struct {
 
 func (c *Command) Execute(args []string) error <span class="cov8" title="1">{
 
-        isRoot, _ := IsRoot()
+        isRoot, _ := Util.IsRoot()
         if c.RootExcluded &amp;&amp; isRoot </span><span class="cov0" title="0">{
                 return ErrSubCommandRootExcluded
         }</span>
@@ -726,6 +728,7 @@ func Hr(width int) <span class="cov0" title="0">{
 
 import (
         "fmt"
+        "os"
         "regexp"
 )
 
@@ -734,7 +737,12 @@ type Root struct {
         Commands map[string]Command
 }
 
-func (r *Root) Run(args []string) error <span class="cov8" title="1">{
+func (r *Root) Run() error <span class="cov0" title="0">{
+        args := os.Args[1:]
+        return r.run(args)
+}</span>
+
+func (r *Root) run(args []string) error <span class="cov8" title="1">{
         var err error
         cmd := ""
 
@@ -785,8 +793,6 @@ func (r *Root) PrintHelp() <span class="cov0" title="0">{
 
 import (
         "fmt"
-        "os"
-        "time"
 
         GoConsole "github.com/artziel/go-console"
 )
@@ -811,21 +817,8 @@ func main() <span class="cov0" title="0">{
                                 Run: func(args interface{}) error </span><span class="cov0" title="0">{
                                         flags := args.(*SubCommandAFlags)
                                         fmt.Printf("Main Command - Args: %v\n", flags)
-
-                                        cmd := GoConsole.NewShellCommand("ls -la", "List files")
-                                        if success := cmd.Exec(); !success </span><span class="cov0" title="0">{
-                                                fmt.Printf("%v\n", cmd.GetLog())
-                                        }</span>
-
-                                        <span class="cov0" title="0">spinner := GoConsole.Spinner09()
-                                        spinner.SetColor("blue").SetPrefix("Test Prefix ").SetSufix(" Runing Process, please wait!").Start()
-
-                                        time.Sleep(5 * time.Second)
-                                        spinner.Stop()
-                                        GoConsole.Printf("Process finish ... &lt;green&gt;OK!&lt;/green&gt;\n")
-
-                                        return nil</span>
-                                },
+                                        return nil
+                                }</span>,
                         },
                         "SubCommandA": {
                                 Help:    "SubCommand A",
@@ -844,17 +837,44 @@ func main() <span class="cov0" title="0">{
                 },
         }
 
-        <span class="cov0" title="0">if err := root.Run(os.Args[1:]); err != nil </span><span class="cov0" title="0">{
+        <span class="cov0" title="0">if err := root.Run(); err != nil </span><span class="cov0" title="0">{
                 fmt.Println(err.Error())
         }</span>
 }
 </pre>
 		
-		<pre class="file" id="file8" style="display: none">package GoConsole
+		<pre class="file" id="file8" style="display: none">package main
 
 import (
         "fmt"
+        "time"
+
+        GoConsole "github.com/artziel/go-console"
 )
+
+func main() <span class="cov0" title="0">{
+        spinners := []*GoConsole.Spinner{
+                GoConsole.Spinner01(),
+                GoConsole.Spinner02(),
+                GoConsole.Spinner03(),
+                GoConsole.Spinner04(),
+                GoConsole.Spinner05(),
+                GoConsole.Spinner06(),
+                GoConsole.Spinner07(),
+                GoConsole.Spinner08(),
+                GoConsole.Spinner09(),
+        }
+
+        for i, spinner := range spinners </span><span class="cov0" title="0">{
+                spinner.SetColor("blue").SetPrefix(fmt.Sprintf("Spinner %d - Prefix ", i+1)).SetSufix(" Spinner Sufix").Start()
+                time.Sleep(3 * time.Second)
+                spinner.Stop()
+                fmt.Printf("Spinner %d Stoped!\n", i+1)
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package GoConsole
 
 type SelectComponent struct {
         Options []string
@@ -873,14 +893,14 @@ func (c *SelectComponent) AddOption(label string) *SelectComponent <span class="
 func (c *SelectComponent) printOptions() <span class="cov0" title="0">{
 
         for i, op := range c.Options </span><span class="cov0" title="0">{
-                fmt.Printf(Colored("&lt;yellow&gt;%v)&lt;/yellow&gt; %v\n"), i+1, op)
+                Printf("&lt;yellow&gt;%v)&lt;/yellow&gt; %v\n", i+1, op)
         }</span>
 }
 
 func (c *SelectComponent) Request(message string) int <span class="cov0" title="0">{
 
         c.printOptions()
-        fmt.Print(message)
+        Printf(message)
 
         for </span><span class="cov0" title="0">{
                 v := ScanInt()
@@ -899,7 +919,7 @@ func NewSelect(options []string) SelectComponent <span class="cov0" title="0">{
 }</span>
 </pre>
 		
-		<pre class="file" id="file9" style="display: none">package GoConsole
+		<pre class="file" id="file10" style="display: none">package GoConsole
 
 import (
         "fmt"
@@ -929,7 +949,7 @@ func (s *Spinner) draw() <span class="cov0" title="0">{
         }</span>
 
         <span class="cov0" title="0">s.clear()
-        fmt.Printf("%s%s%s", Colored(s.prefix), frame, Colored(s.sufix))
+        Printf("%s%s%s", s.prefix, frame, s.sufix)
 
         s.currentFrame++
         if s.currentFrame == len(s.Frames) </span><span class="cov0" title="0">{
@@ -1009,33 +1029,6 @@ func (s *Spinner) Start() <span class="cov0" title="0">{
                 }
         }(s)
 }
-</pre>
-		
-		<pre class="file" id="file10" style="display: none">package GoConsole
-
-import (
-        "errors"
-        "os/user"
-
-        "github.com/zcalusic/sysinfo"
-)
-
-var ErrUnableToGetUser error = errors.New("unable to get current user")
-var ErrInputValueUnexpected error = errors.New("unexpected input value")
-
-func IsRoot() (bool, error) <span class="cov8" title="1">{
-        currentUser, err := user.Current()
-        if err != nil </span><span class="cov0" title="0">{
-                return false, ErrUnableToGetUser
-        }</span>
-        <span class="cov8" title="1">return currentUser.Username == "root", nil</span>
-}
-
-func GetSystemInfo() sysinfo.SysInfo <span class="cov0" title="0">{
-        var si sysinfo.SysInfo
-        si.GetSysInfo()
-        return si
-}</span>
 </pre>
 		
 		<pre class="file" id="file11" style="display: none">package GoConsole
@@ -1148,7 +1141,7 @@ func ScanInt() int <span class="cov0" title="0">{
 }
 
 func WaitForEnter(msg string) <span class="cov0" title="0">{
-        fmt.Println(msg)
+        Println(msg)
         var input string
         fmt.Scanln(&amp;input)
 }</span>
@@ -1158,6 +1151,7 @@ func windowsClearTerm() <span class="cov0" title="0">{
         cmd.Stdout = os.Stdout
         cmd.Run()
 }</span>
+
 func linuxClearTerm() <span class="cov0" title="0">{
         cmd := exec.Command("clear")
         cmd.Stdout = os.Stdout
@@ -1190,7 +1184,7 @@ func formatToWidth(str string, width int) string <span class="cov0" title="0">{
                 }</span>
         }
 
-        <span class="cov0" title="0">result = result + "\n" + line
+        <span class="cov0" title="0">result = result + "\n" + strings.TrimRight(line, " ")
 
         return result</span>
 }
@@ -1204,11 +1198,15 @@ func FormatParagraph(str string, width int) string <span class="cov0" title="0">
                 result = result + formatToWidth(p, width)
         }</span>
 
-        <span class="cov0" title="0">return Colored(result)</span>
+        <span class="cov0" title="0">return result</span>
 }
 
 func PrintParagraph(str string, width int) <span class="cov0" title="0">{
-        fmt.Print(FormatParagraph(str, 60))
+        Print(FormatParagraph(str, width))
+}</span>
+
+func Print(str string) <span class="cov0" title="0">{
+        fmt.Print(Colored(str))
 }</span>
 
 func Println(str string) <span class="cov0" title="0">{

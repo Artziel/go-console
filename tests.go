@@ -17,7 +17,7 @@ type testRootFlags struct {
 
 var command = Command{
 	Help:    "Main Command",
-	Example: "$ sample",
+	Example: "$ command",
 	Flags: &testRootFlags{
 		String:  "string test no subcommand",
 		Boolean: false,
@@ -32,7 +32,7 @@ var command = Command{
 
 var subCommand = Command{
 	Help:    "SubCommand",
-	Example: "$ sample SubCommand",
+	Example: "$ command SubCommand",
 	Flags: &testRootFlags{
 		String:  "string test subcommand",
 		Boolean: false,
