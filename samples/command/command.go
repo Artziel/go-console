@@ -43,6 +43,14 @@ func main() {
 					return nil
 				},
 			},
+			"SubCommandB": {
+				Help:    "SubCommand B",
+				Example: "$ sample SubCommandB",
+				Run: func(args interface{}) error {
+					fmt.Println("SubCommand B - without flags")
+					return nil
+				},
+			},
 		},
 	}
 
