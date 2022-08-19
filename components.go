@@ -3,18 +3,16 @@ package GoConsole
 import "time"
 
 func Spinner01() *Spinner {
+	chars := "⣾⣽⣻⢿⡿⣟⣯⣷"
+
+	frames := []string{}
+	for _, c := range chars {
+		frames = append(frames, string(c))
+	}
+
 	spinner := Spinner{
-		delay: time.Millisecond * 100,
-		Frames: []string{
-			"⣾",
-			"⣽",
-			"⣻",
-			"⢿",
-			"⡿",
-			"⣟",
-			"⣯",
-			"⣷",
-		},
+		delay:  time.Millisecond * 100,
+		Frames: frames,
 	}
 
 	return &spinner

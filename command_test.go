@@ -14,7 +14,7 @@ func TestCommand(t *testing.T) {
 		}
 		err := command.Execute(args)
 		if err != nil {
-			t.Errorf("unexpected error: %v", err.Error())
+			t.Errorf("unexpected command error: %v", err.Error())
 		}
 	})
 

@@ -1,9 +1,11 @@
 package GoConsole
 
 import (
-	"fmt"
+	"errors"
 	"strings"
 )
+
+var ErrConfirmInvalidOption error = errors.New("invalid input option")
 
 type ConfirmOption struct {
 	Label string
@@ -15,21 +17,42 @@ type ConfirmComponent struct {
 	No  ConfirmOption
 }
 
-func (c ConfirmComponent) Request() bool {
-	options := fmt.Sprintf(Colored("<green>%v</green> / <yellow>%v</yellow>: "), c.Yes.Label, c.No.Label)
-	fmt.Print(options)
+func (c *ConfirmComponent) printOptions() {
+	Printf("<green>%s</green> / <yellow>%s</yellow>: ", c.Yes.Label, c.No.Label)
+}
+
+func (c *ConfirmComponent) eval(value string) (bool, error) {
+	var err error
+	value = strings.ToLower(value)
+	result := false
+
+	if value != strings.ToLower(c.Yes.Value) && value != strings.ToLower(c.No.Value) {
+		err = ErrConfirmInvalidOption
+	}
+
+	if value == strings.ToLower(c.Yes.Value) {
+		result = true
+	}
+
+	if value == strings.ToLower(c.No.Value) {
+		result = false
+	}
+
+	return result, err
+}
+
+func (c *ConfirmComponent) Request() bool {
+
+	c.printOptions()
 
 	for {
-		var input string
-		fmt.Scanln(&input)
-		value := strings.ToLower(input)
+		input := ScanString()
+		val, err := c.eval(input)
 
-		if value == strings.ToLower(c.Yes.Value) {
-			return true
-		} else if value == strings.ToLower(c.No.Value) {
-			return false
+		if err != nil {
+			c.printOptions()
 		} else {
-			fmt.Print(options)
+			return val
 		}
 	}
 }

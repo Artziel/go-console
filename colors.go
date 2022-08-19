@@ -24,6 +24,14 @@ const (
 	CyanUnderlined   = "\033[4;36m"
 	WhiteUnderlined  = "\033[4;37m"
 
+	RedBold    = "\033[1;31m"
+	GreenBold  = "\033[1;32m"
+	YellowBold = "\033[1;33m"
+	BlueBold   = "\033[1;34m"
+	PurpleBold = "\033[1;35m"
+	CyanBold   = "\033[1;36m"
+	WhiteBold  = "\033[1;37m"
+
 	RedBoldUnderlined    = "\033[1;4;31m"
 	GreenBoldUnderlined  = "\033[1;4;32m"
 	YellowBoldUnderlined = "\033[1;4;33m"
@@ -92,19 +100,19 @@ func Colored(str string) string {
 			formatted = strings.Replace(formatted, "<"+t+">", WhiteUnderlined, -1)
 
 		case "red bold":
-			formatted = strings.Replace(formatted, "<"+t+">", RedUnderlined, -1)
+			formatted = strings.Replace(formatted, "<"+t+">", RedBold, -1)
 		case "green bold":
-			formatted = strings.Replace(formatted, "<"+t+">", GreenUnderlined, -1)
+			formatted = strings.Replace(formatted, "<"+t+">", GreenBold, -1)
 		case "yellow bold":
-			formatted = strings.Replace(formatted, "<"+t+">", YellowUnderlined, -1)
+			formatted = strings.Replace(formatted, "<"+t+">", YellowBold, -1)
 		case "cyan bold":
-			formatted = strings.Replace(formatted, "<"+t+">", CyanUnderlined, -1)
+			formatted = strings.Replace(formatted, "<"+t+">", CyanBold, -1)
 		case "blue bold":
-			formatted = strings.Replace(formatted, "<"+t+">", BlueUnderlined, -1)
+			formatted = strings.Replace(formatted, "<"+t+">", BlueBold, -1)
 		case "purple bold":
-			formatted = strings.Replace(formatted, "<"+t+">", PurpleUnderlined, -1)
+			formatted = strings.Replace(formatted, "<"+t+">", PurpleBold, -1)
 		case "white bold":
-			formatted = strings.Replace(formatted, "<"+t+">", WhiteUnderlined, -1)
+			formatted = strings.Replace(formatted, "<"+t+">", WhiteBold, -1)
 
 		case "red bold underline":
 			formatted = strings.Replace(formatted, "<"+t+">", RedBoldUnderlined, -1)

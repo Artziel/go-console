@@ -3,6 +3,7 @@ package GoConsole
 import "errors"
 
 var ErrWrongFalgsType = errors.New("command flags must be a pointer to an structure")
+var ErrFlagsNotAnStructure error = errors.New("flags are not an structure")
 
 var ErrSubCommandUnespecified = errors.New("you must pass a sub-command")
 var ErrSubCommandNotFound = errors.New("sub-command not found")

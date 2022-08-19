@@ -5,18 +5,17 @@ import (
 	"testing"
 )
 
-const testCommandHelp = `
-- <yellow>[With no SubCommand]</yellow>: Main Command
+const testCommandHelpA = `- <yellow>[With no SubCommand]</yellow>: Main Command
 
-    Example: $ sample
+    Example: $ command
 
     <blue>-str</blue>: String value example
     <blue>-b</blue>: Boolean value example
     <blue>-i</blue>: Integer value example
 
-- <yellow>SubCommandA</yellow>: SubCommand A
+- <yellow>subCommand</yellow>: SubCommand
 
-    Example: $ sample SubCommandA
+    Example: $ command SubCommand
 
     <blue>-str</blue>: String value example
     <blue>-b</blue>: Boolean value example
@@ -48,7 +47,7 @@ func TestRoot(t *testing.T) {
 
 	expected := "SubCommand- Args: &{test string true 321}\n"
 	if output != expected {
-		t.Errorf("unexpected command output: \n got %v\nwant %v", output, expected)
+		t.Errorf("unexpected command output:\n got %v\nwant %v", output, expected)
 	}
 
 	output2 := captureOutput(func() {
@@ -69,9 +68,9 @@ func TestRoot(t *testing.T) {
 	}
 
 	h := root.help()
-	expected = Colored(testCommandHelp)
+	expected = Colored(testCommandHelpA)
 	if h != expected {
-		t.Errorf("unexpected command help output: \ngot\n%s\nwant\n%s", h, expected)
+		t.Errorf("unexpected command help output:\n-- got\n%v\n-- want\n%v", h, expected)
 	}
 
 }
