@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"runtime"
 	"strconv"
 	"strings"
@@ -15,6 +16,15 @@ func ScanString() string {
 	text, _ := reader.ReadString('\n')
 	text = strings.TrimSuffix(text, "\n")
 	return text
+}
+
+func PWD() string {
+	ex, err := os.Executable()
+	if err != nil {
+		return ""
+	}
+	exPath := filepath.Dir(ex)
+	return exPath
 }
 
 func ScanInt() int {
